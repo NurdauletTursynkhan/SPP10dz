@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// Абстрактный класс компонента организации
 abstract class OrganizationComponent {
     protected String name;
 
@@ -16,7 +15,6 @@ abstract class OrganizationComponent {
     public abstract List<String> getAllEmployees();
 }
 
-// Класс сотрудника
 class Employee extends OrganizationComponent {
     private String position;
     private int salary;
@@ -59,7 +57,6 @@ class Employee extends OrganizationComponent {
     }
 }
 
-// Класс контрактного сотрудника
 class Contractor extends OrganizationComponent {
     private String position;
     private int fixedPayment;
@@ -98,7 +95,6 @@ class Contractor extends OrganizationComponent {
     }
 }
 
-// Класс отдела
 class Department extends OrganizationComponent {
     private List<OrganizationComponent> subordinates = new ArrayList<>();
 
@@ -164,10 +160,8 @@ class Department extends OrganizationComponent {
     }
 }
 
-// Главный класс
 public class Main {
     public static void main(String[] args) {
-        // Пример сотрудников и контракторов
         Employee employee1 = new Employee("Алия", "Разработчик", 1000);
         Employee employee2 = new Employee("Ержан", "Разработчик", 1200);
         Contractor contractor1 = new Contractor("Болат", "Тестировщик", 800);
@@ -186,18 +180,15 @@ public class Main {
         company.add(devDepartment);
         company.add(hrDepartment);
 
-        // Отображение структуры компании и бюджета
         System.out.println("Структура компании:");
         company.showDetails();
         System.out.println("Общий бюджет компании: " + company.getBudget());
         System.out.println("Общее количество сотрудников компании: " + company.getEmployeeCount());
 
-        // Изменение зарплаты сотрудника и пересчет бюджета
         System.out.println("\nИзменение зарплаты сотрудника Ержан...");
         employee2.setSalary(1300);
         System.out.println("Общий бюджет компании после изменения зарплаты: " + company.getBudget());
 
-        // Поиск сотрудника по имени
         String searchName = "Алия";
         OrganizationComponent found = company.findByName(searchName);
         if (found != null) {
@@ -207,7 +198,6 @@ public class Main {
             System.out.println("\nСотрудник " + searchName + " не найден.");
         }
 
-        // Отображение всех сотрудников отдела разработки и его подотделов
         System.out.println("\nСписок всех сотрудников отдела разработки:");
         List<String> allEmployees = devDepartment.getAllEmployees();
         for (String empName : allEmployees) {
